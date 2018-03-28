@@ -1,0 +1,48 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+ <script src="js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootst
+rap-datetimepicker.min.js"></script>
+
+ 
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+</head>
+<body>
+<div class="container">
+ Date of birth:   
+<div class="row">
+<div class="col-md-6">
+            <div class="form-group" type="position: relative">
+                <label for="from" class="control-label">from:</label>
+                <input type='text'  id='datetimepicker4'  name="dob">
+            </div>
+       
+ <!-- we have to add extra js and css for date picker check the head  tag partand script also added -->
+  <br><br>
+</div>
+</div>
+
+
+ <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker4').datetimepicker({
+              
+                format: 'YYYY/MM/DD'
+            });
+        });
+    </script>
+	
+	<body>
+	</html>
+	

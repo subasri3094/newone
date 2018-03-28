@@ -1,0 +1,321 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+ 
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+
+
+ <!--<script src="js/bootstrap.min.js"></script>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<script src="js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+
+</head>
+<body>
+<div class="row">
+<div class="col-md-6">
+
+<h2>STUDENT REGISTRATION</h2>
+<form method="post" action="studentdetailstored.php"  enctype="multipart/form-data">
+  Name: <input id="form_name" type="text" name="name">
+  <br><br>
+  <div id="usererror" style="display:none">name is error</div>
+ Father  Name: <input type="text" name="fathername">
+  <br><br>
+  Date of birth:   <input type='text'  id='datetimepicker4'  name="dob"> <!-- we have to add extra js and css for date picker check the head  tag partand script also added -->
+  <br><br>
+  Gender:
+  <input type="radio" name="gender" value="female">Female
+  <input type="radio" name="gender" value="male">Male
+  <br><br>
+  
+ UserName: <input id="username" type="text" name="username">
+  <br><br>
+  Password: <input type="text" name="password">
+  <br><br>
+   Phone: <input id="form_phone" type="number" name="phone">
+  <br><br>
+  <div id="phoneerror" style="display:none"> phone is not valid </div>
+  <br><br>
+   city: <input type="text" name="city">
+  <br><br>
+  
+   
+  Pincode: <input id="pin-code" type="number" name="pincode">
+  <br><br>
+   <div id="pincode-error" style="display:none"> pincode is not valid </div>
+   <br><br>
+  E-mail: <input id="email" type="text" name="email">
+  <br><br>
+  <div id="reg-error" style="display:none"> email is not valid </div>
+   <br><br>
+     Select image to upload:
+ <input type="file" name="image" value="Upload Image"  id="fileToUpload">
+	  <br><br>
+  
+  <input type="submit" name="submit" value="Submit">  
+</form>
+</div>
+</div>
+</div>
+          
+		 <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker4').datetimepicker({
+              
+                format: 'YYYY/MM/DD'
+            });
+        });
+    </script>
+	
+	
+	
+
+<script>
+
+$(document).ready(function(){
+
+
+ $("#form_phone").keypress(function(event){	
+ 
+ var x = $("#form_phone").val();
+ console.log(x);
+ if(x.length < 10 )
+ {
+     var keycode = event.which;
+     console.log(keycode);
+	
+        if (!(event.shiftKey == false && (keycode == 46 || keycode == 8 || keycode == 13 ||  keycode == 9 || keycode == 37 || keycode == 39 || 
+		 (keycode >= 48 && keycode <= 57)))) 
+		{
+        event.preventDefault();		
+		$("#phoneerror").show();		
+        } 		
+		
+        else{
+			$("#phoneerror").hide();
+
+			return true;
+
+		}
+		
+		}
+		
+		else{
+		return false;
+		}
+	 });
+
+$("#pin-code").keypress(function(event){	
+ 
+ var x = $("#pincode").val();
+ console.log(x);
+ if(x.length < 6 )
+ {
+     var keycode = event.which;
+     console.log(keycode);
+	
+        if (!(event.shiftKey == false && (keycode == 46 || keycode == 8 || keycode == 13 ||  keycode == 9 || keycode == 37 || keycode == 39 || 
+		 (keycode >= 48 && keycode <= 57)))) 
+		{
+        event.preventDefault();		
+		$("#pincode-error").show();		
+        } 		
+		
+        else{
+			$("#pincode-error").hide();
+
+			return true;
+
+		}
+		
+		}
+		
+		else{
+		return false;
+		}
+	 });
+
+var flag = 0;
+    $("#form_name").keypress(function(event){
+	
+     var keycode = event.which;
+     console.log(keycode);
+ 
+        if (!(event.shiftKey == false && (keycode == 46 || keycode == 8 || keycode == 13 ||  keycode == 9 || keycode == 37 || keycode == 32 || keycode == 39 || 
+		(keycode >= 96 && keycode <= 122) || (keycode >= 65 && keycode <= 90)))) {
+        event.preventDefault();
+		
+		$("#usererror").show();
+		
+        }
+		
+		else{
+       if (keycode == 32)
+            {
+            if ($(this).val().length == 0) {
+				$("#usererror").show();
+                return false;
+            }
+            else
+            {
+                if (flag == 0) 
+				{
+                    flag = 1;
+					console.log("1");
+					$("#usererror").hide();
+                    return true;
+					
+					
+                }
+                else
+                {
+				console.log("2");
+					$("#usererror").show();
+                    return false;
+					
+                }
+            }
+
+        }else
+		{
+            flag = 0;
+				$("#usererror").hide();
+            return true;
+			
+        }
+        
+			$("#usererror").hide();
+
+			return true;
+
+		}
+	 });
+	   
+	  
+$('#email').keypress(function (e) {
+
+	console.log("hai");
+	mobiletabflag = 0;
+	var keypressm=emailvalidation();
+	if(keypressm == 1)
+	{
+	$("#regerror").show();
+		console.log("enterr corectemail");
+	}
+	else
+	{
+		$("#regerror").hide();
+		console.log("sucees");
+	}
+});
+
+ 
+function emailvalidation() {
+    //var e = document.getElementById("email"),
+    //    i = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;    
+    //return e.value.match(i) ? ($("#samplespan").hide(),$("#samplespan").hide() ,$("#samplespan").hide() , !0) : "" == e.value ? ($("#samplespan").hide(), $('#email').attr("title", "e-mail ID required").tooltip('show'),$("#samplespan").hide() , !1) : ($("#samplespan").hide(), $('#email').attr("title", "Enter a Valid e-mail ID").tooltip('show'), !1)
+    var ev = document.getElementById("email").value;
+    console.log('ev : ' + ev);
+    
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    //console.log('reg : ' + reg);
+    console.log ('Subasri : ' + reg.test(document.getElementById("email").value));
+    var eflag = 1;
+    if(reg.test(document.getElementById("email").value) == true)
+    {
+    	eflag = 0;
+    }
+    //console.log(ev.indexOf('.'));
+    /* if(ev.indexOf('.') > -1)
+    {
+    	eflag = 0;
+    }
+    if(ev.indexOf('@') > -1)
+    {
+    	eflag = 0;
+    } */
+    return eflag;
+}
+         
+		 
+function passwordvalidation() {
+    var e = document.getElementById("regpwd").value.toString().length;
+    //return 8 > e || e > 15 ? ($('#password').attr("title", "Password should contain 8 to 15 characters").tooltip('show'), !1) : !0
+    if(e < 8 || e > 15)
+    {
+    	return 1; 	
+    }
+    else
+    {
+    	return 0;	
+    }
+    
+}
+ $("#submitbutton").click(function()
+ {
+  console.log('suba');
+  var mandatorycheck = 0;
+	 console.log('suba');
+	 //alert('taborMob : ' + taborMob);
+	
+	
+	var p=passwordvalidation();
+	console.log('For Password : ' + p);
+	if(p == 1)
+	{
+		console.log("4 to 15");
+		mandatorycheck = 1;
+	}
+	else{
+	console.log("success");
+	
+	
+	}
+	
+	
+	
+    if(mandatorycheck != 1)
+    {
+    	
+		console.log("hai suba");
+       $("#thanksbox").show();
+    }
+	
+	
+    
+    
+    
+    
+});
+	   
+	   
+});
+
+</script>
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+
+</html>
+</html>
